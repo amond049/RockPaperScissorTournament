@@ -70,6 +70,13 @@ function moveRectangle(blocks){
         if (block.getX() + 20 < canvas.width && block.getX() > 0){
             block.setX(block.getX() + block.getXVel());
         } else{
+            // This bit of code should hopefully prevent any blocks from getting stuck in the walls
+            if (block.getX() + 20 > canvas.width){
+                black.setX(canvas.width - 20);
+            } else {
+                black.setX(0);
+            }
+            
             block.setXVelocity(-block.getXVel());
             block.setX(block.getX() + block.getXVel());
         }
