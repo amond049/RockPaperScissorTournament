@@ -52,7 +52,7 @@ class Block {
 
 // Generating all the blocks
 // NEXT STEPS: MAKE IT SO THAT PEOPLE CAN ENTER HOW MANY BLOCKS THEY WOULD LIKE TO HAVE!
-for (let i = 0; i < 10; i++){
+for (let i = 0; i < 15; i++){
     let x_coord = Math.trunc(Math.random() * (canvas.width - 20) + 1);
     let y_coord = Math.trunc(Math.random() * (canvas.height - 20) + 1);
     // NEXT STEPS: Make it so that the velocity can be either positive or negative 
