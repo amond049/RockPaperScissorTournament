@@ -58,9 +58,19 @@ for (let i = 0; i < 10; i++){
     // NEXT STEPS: Make it so that the velocity can be either positive or negative 
     let positive_negative_x = Math.round(Math.random());
     let positive_negative_y = Math.round(Math.random());
+    let multiplier_x = 1;
+    let multiplier_y = 1;
     
-    let x_velocity = Math.trunc(Math.random() * 1 * positive_negative_x + 1);
-    let y_velocity = Math.trunc(Math.random() * 1 * positive_negative_y +  1);
+    if (positive_negative_x == 0){
+        multiplier_x = -1;
+    }
+    
+    if (positive_negative_y == 0){
+        multiplier_y = -1;
+    }
+    
+    let x_velocity = Math.trunc(Math.random() * 1 * multiplier_x + 1);
+    let y_velocity = Math.trunc(Math.random() * 1 * multiplier_y +  1);
     let block = new Block(x_coord, y_coord, x_velocity, y_velocity);
 
     blocks.push(block);
