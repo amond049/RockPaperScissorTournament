@@ -98,6 +98,12 @@ function moveRectangle(blocks){
         if (block.getY() + 20 < canvas.height && block.getY() > 0){
             block.setY(block.getY() + block.getYVel());
         } else{
+            // This bit of code should prevent any blocks from getting stuck at the top or bottom of the screen
+            if (block.getY() + 20 >= canvas.height){
+                block.setY(canvas.height - 20);
+            } else {
+                block.setY(0);
+            }
             block.setYVelocity(-block.getYVel());
             block.setY(block.getY() + block.getYVel());
         }
