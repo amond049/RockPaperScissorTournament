@@ -1,10 +1,12 @@
+// Creating the canvas and initializing it such that it can be drawn on
 var canvas = document.getElementById("screen");
 var ctx = canvas.getContext("2d");
 
+// An array that will contain all Block instances
 var blocks = [];
 
 
-// Need to create an array of blocks
+// Creating a Block class that will be the type of all Rock, Papers and Scissors 
 class Block {
     constructor(x, y, x_vel, y_vel){
         this.x_coordinate = x;
@@ -13,6 +15,7 @@ class Block {
         this.y_velocity = y_vel;
     }
 
+    // Creating the getter methods 
     getX() {
         return this.x_coordinate;
     }
@@ -29,6 +32,7 @@ class Block {
         return this.y_velocity;
     }
 
+    // Creating the setter methods
     setX(x){
         this.x_coordinate = x;
     }
@@ -46,7 +50,9 @@ class Block {
     }
 }
 
-for (let i = 0; i < 4; i++){
+// Generating all the blocks
+// NEXT STEPS: MAKE IT SO THAT PEOPLE CAN ENTER HOW MANY BLOCKS THEY WOULD LIKE TO HAVE!
+for (let i = 0; i < 5; i++){
     let x_coord = Math.trunc(Math.random() * (canvas.width - 20) + 1);
     let y_coord = Math.trunc(Math.random() * (canvas.height - 20) + 1);
     let x_velocity = Math.trunc(Math.random() * 1 + 1);
@@ -56,8 +62,10 @@ for (let i = 0; i < 4; i++){
     blocks.push(block);
 }
 
+// Moving the blocks around the screen
 function moveRectangle(blocks){
     
+    // Checking to see if the blocks are colliding with the borders of the canvas
     blocks.forEach(block => {
         if (block.getX() + 20 < canvas.width && block.getX() > 0){
             block.setX(block.getX() + block.getXVel());
@@ -73,13 +81,13 @@ function moveRectangle(blocks){
             block.setY(block.getY() + block.getYVel());
         }
     })
+
+    // Checking to see if the blocks are colliding with each other. Not that efficient of a solution as it is O(n^2) algorithm, but I don't imagine 
+    // overloading the application with so many blocks it won't be able to hand it all
     for (let i = 0; i < blocks.length; i++){
         let current_x = blocks[i].getX();
         let current_y = blocks[i].getY();
-        
-        //console.log("The current x position of block " + (i+1));
-        //console.log(current_x);
-
+ 
         for (let j = 0; j < blocks.length; j++){
             if (j != i ){
                 let new_x = blocks[j].getX();
@@ -109,6 +117,7 @@ function moveRectangle(blocks){
     }
 }
 
+// Drawing the rectangles at each update of the screen
 function drawRectangle(){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "#666";
@@ -117,6 +126,7 @@ function drawRectangle(){
     moveRectangle(blocks);
 }
 
+// Refreshing the screen every 10 ms
 setInterval(function(){drawRectangle()}, 10);
 
 
