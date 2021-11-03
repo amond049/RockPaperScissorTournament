@@ -55,6 +55,7 @@ class Block {
 for (let i = 0; i < 10; i++){
     let x_coord = Math.trunc(Math.random() * (canvas.width - 20) + 1);
     let y_coord = Math.trunc(Math.random() * (canvas.height - 20) + 1);
+    // NEXT STEPS: Make it so that the velocity can be either positive or negative 
     let x_velocity = Math.trunc(Math.random() * 1 + 1);
     let y_velocity = Math.trunc(Math.random() * 1 + 1);
     let block = new Block(x_coord, y_coord, x_velocity, y_velocity);
