@@ -69,8 +69,8 @@ for (let i = 0; i < 10; i++){
         multiplier_y = -1;
     }
     
-    let x_velocity = Math.trunc(Math.random() * 1 * multiplier_x + 1);
-    let y_velocity = Math.trunc(Math.random() * 1 * multiplier_y +  1);
+    let x_velocity = Math.trunc(Math.random() * 1 + 1) * multiplier_x;
+    let y_velocity = Math.trunc(Math.random() * 1 + 1) * multiplier_y;
     let block = new Block(x_coord, y_coord, x_velocity, y_velocity);
 
     blocks.push(block);
