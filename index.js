@@ -129,7 +129,20 @@ function moveRectangle(blocks){
         }
     })
 
-    // Need to make the checking if they are colliding function much more efficient, cannot keep up with the changing images
+    // Need to order the x and y positions of each block
+    let x_positions = {};
+
+    for (let i = 0; i < blocks.length; i++){
+        x_positions["x_position" + i] = blocks[i].getX();
+    }
+    
+    // Sorting the x-values
+    var sorted_x_positions = Object.values(x_positions).sort(compareNumbers);
+    
+    
+
+    
+    // Need to make the checking if they are colliding function much more efficient, cannot keep up with the changing images    
     for (let i = 0; i < blocks.length; i++){
         let current_x = blocks[i].getX();
         let current_y = blocks[i].getY();
@@ -145,25 +158,43 @@ function moveRectangle(blocks){
                     if (blocks[i].getClassification() == "rock" && blocks[j].getClassification() == "paper"){
                         blocks[i].setClassification("paper");
                     } else if (blocks[i].getClassification() == "rock" && blocks[j].getClassification() == "scissors"){
-                        console.log(blocks[j].getClassification());
+                        //console.log(blocks[j].getClassification());
                         blocks[j].setClassification("rock");
-                        console.log(blocks[j].getClassification());
+                        //console.log(blocks[j].getClassification());
                     }
 
                     if (blocks[i].getClassification() == "paper" && blocks[j].getClassification() == "scissors"){
                         blocks[i].setClassification("scissors");
                     } else if (blocks[i].getClassification() == "paper" && blocks[j].getClassification() == "rock"){
-                        console.log(blocks[j].getClassification());
+                        //console.log(blocks[j].getClassification());
                         blocks[j].setClassification("paper");
-                        console.log(blocks[j].getClassification());
+                        //console.log(blocks[j].getClassification());
                     }
 
                     if (blocks[i].getClassification() == "scissors" && blocks[j].getClassification() == "paper"){
                         blocks[i].setClassification("scissors");
                     } else if (blocks[i].getClassification() == "scissors" && blocks[j].getClassification() == "rock"){
-                        console.log(blocks[j].getClassification());
+                        //console.log(blocks[j].getClassification());
                         blocks[j].setClassification("rock");
-                        console.log(blocks[j].getClassification());
+                        //console.log(blocks[j].getClassification());
+                    }
+
+                    if (blocks[j].getClassification() == "rock" && blocks[i].getClassification() == "paper"){
+                        blocks[j].setClassification("paper");
+                    } else if (blocks[j].getClassification() == "rock" && blocks[i].getClassification() == "scissors"){
+                        blocks[i].setClassification("rock");
+                    }
+
+                    if (blocks[j].getClassification() == "paper" && blocks[i].getClassification() == "scissors"){
+                        blocks[j].setClassification("scissors");
+                    } else if (blocks[j].getClassification() == "paper" && blocks[i].getClassification() == "rock"){
+                        blocks[i].setClassification("paper");
+                    }
+
+                    if (blocks[j].getClassification() == "scissors" && blocks[i].getClassification() == "paper"){
+                        blocks[j].setClassification("scissors");
+                    } else if (blocks[j].getClassification() == "scissors" && blocks[i].getClassification() == "rock"){
+                        blocks[i].setClassification("rock");
                     }
 
                     // Perfectly elastic collision
@@ -185,6 +216,15 @@ function moveRectangle(blocks){
             }
         }
     }
+    
+}
+
+function compareNumbers(a, b){
+    return a - b;
+}
+
+function getKeyByValue(object, value){
+    return Object.keys(object).find(key => object[key] === value);
 }
 
 // Drawing the rectangles at each update of the screen
