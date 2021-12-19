@@ -1,0 +1,37 @@
+body{
+    background-color: orange;
+}
+
+canvas{
+    margin: 0 auto;
+    background-color: white;
+    margin-left: 100px;
+}
+
+
+#blocksinfo{
+    text-align: center;
+    font-weight: bold;
+    float: left;
+    width: 25%;
+    height: 600px;
+    margin-left: 10%;
+    align-items: center;
+    font-size: 48px;
+}
+
+#disclaimer{
+    font-size: 16px;
+}
+#blockscanvas{
+    float: right;
+    width: 60%;
+}
+h1{
+    text-align: center;
+}
+
+.slider{
+    width: 40.25%;
+    margin-left: 46.5%;
+}
