@@ -84,7 +84,6 @@ function createBlocks(number){
         let y_velocity = Math.trunc(Math.random() * 1 + 1) * multiplier_y;
 
         let classification = options[current_index];
-        console.log(classification);
         if (current_index != 2){
             current_index += 1
         } else {
@@ -136,13 +135,6 @@ function moveRectangle(blocks){
         x_positions["x_position" + i] = blocks[i].getX();
     }
     
-    // Sorting the x-values
-    var sorted_x_positions = Object.values(x_positions).sort(compareNumbers);
-    
-    
-
-    
-    // Need to make the checking if they are colliding function much more efficient, cannot keep up with the changing images    
     for (let i = 0; i < blocks.length; i++){
         let current_x = blocks[i].getX();
         let current_y = blocks[i].getY();
@@ -152,31 +144,25 @@ function moveRectangle(blocks){
                 let new_x = blocks[j].getX();
                 let new_y = blocks[j].getY();
 
-
+                // Checking to see if the blocks are colliding 
                 if (Math.abs(new_x - current_x) <= 25 && Math.abs(new_y - current_y) <= 25){
                     // Need to switch based on the results 
                     if (blocks[i].getClassification() == "rock" && blocks[j].getClassification() == "paper"){
                         blocks[i].setClassification("paper");
                     } else if (blocks[i].getClassification() == "rock" && blocks[j].getClassification() == "scissors"){
-                        //console.log(blocks[j].getClassification());
                         blocks[j].setClassification("rock");
-                        //console.log(blocks[j].getClassification());
                     }
 
                     if (blocks[i].getClassification() == "paper" && blocks[j].getClassification() == "scissors"){
                         blocks[i].setClassification("scissors");
                     } else if (blocks[i].getClassification() == "paper" && blocks[j].getClassification() == "rock"){
-                        //console.log(blocks[j].getClassification());
                         blocks[j].setClassification("paper");
-                        //console.log(blocks[j].getClassification());
                     }
 
                     if (blocks[i].getClassification() == "scissors" && blocks[j].getClassification() == "paper"){
                         blocks[i].setClassification("scissors");
                     } else if (blocks[i].getClassification() == "scissors" && blocks[j].getClassification() == "rock"){
-                        //console.log(blocks[j].getClassification());
                         blocks[j].setClassification("rock");
-                        //console.log(blocks[j].getClassification());
                     }
 
                     if (blocks[j].getClassification() == "rock" && blocks[i].getClassification() == "paper"){
@@ -215,8 +201,26 @@ function moveRectangle(blocks){
                 }
             }
         }
+
+        // Checking to see if a specific block has won
+        let winning = true;
+        for (let x = 0; x < blocks.length - 1; x++){
+            if (blocks[x].getClassification() != blocks[x + 1].getClassification()){
+                winning = false;
+            }
+        }
+        
+        // Printing a victory message if a specific block has won and stopping all movement
+        if (winning){
+            let classification = blocks[0].getClassification();
+            document.getElementById("victory-message").innerHTML = classification[0].toUpperCase() + classification.slice(1) + " wins!";
+            for (let z = 0; z < blocks.length; z++){
+                blocks[z].setXVelocity(0);
+                blocks[z].setYVelocity(0);
+            }
+        }
     }
-    
+
 }
 
 function compareNumbers(a, b){
@@ -231,17 +235,16 @@ function getKeyByValue(object, value){
 function drawRectangle(){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "#666";
-    
-    
+
 
     blocks.forEach(block =>{
         var image = new Image();
         image.src = block.getClassification() + ".png";
-        
+
         ctx.drawImage(image, block.getX(), block.getY(), 20, 20)
-    
+
     }
-    
+
     );
     moveRectangle(blocks);
 }
@@ -256,6 +259,5 @@ createBlocks(initialAmount);
 
 slider.oninput = function(){
     createBlocks(this.value);
-    console.log(this.value);
     document.getElementById("numberOfBlocks").innerHTML = this.value + " blocks!";
 }
