@@ -1,6 +1,11 @@
+@font-face{
+    font-family: "Oswald";
+    src: url("Oswald/static/Oswald-Regular.ttf");
+}
+
 body{
     background-color: orange;
-    font-family: Arial;
+    font-family: "Oswald";
 }
 
 canvas{
