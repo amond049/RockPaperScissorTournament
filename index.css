@@ -134,3 +134,8 @@ h1{
 ::-webkit-scrollbar-thumb{
     background: #888;
 }
+
+a, a:visited{
+    text-decoration: none;
+    color: black;
+}
