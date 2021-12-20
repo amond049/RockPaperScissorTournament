@@ -265,6 +265,8 @@ var slider = document.getElementById("blockRange");
 var initialAmount = slider.value;
 createBlocks(initialAmount);
 changeColour(colour);
+
+
 slider.oninput = function(){
     document.getElementById("victory-message").innerHTML = "";
     createBlocks(this.value);
