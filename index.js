@@ -258,6 +258,7 @@ var initialAmount = slider.value;
 createBlocks(initialAmount);
 
 slider.oninput = function(){
+    document.getElementById("victory-message").innerHTML = "";
     createBlocks(this.value);
     document.getElementById("numberOfBlocks").innerHTML = this.value + " blocks!";
 }
