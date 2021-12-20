@@ -126,10 +126,6 @@ h1{
     width: 10px;
 }
 
-::-webkit-scrollbar-track{
-    background:rgb(250, 213, 165);
-}
-
 ::-webkit-scrollbar-thumb{
     background: #888;
 }
