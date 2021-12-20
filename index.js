@@ -8,6 +8,8 @@ var blocks = [];
 var current_index = 0;
 var options = ["rock", "paper", "scissors"];
 
+var colour = "orange";
+
 // Creating a Block class that will be the type of all Rock, Papers and Scissors
 class Block {
     constructor(x, y, x_vel, y_vel, classification){
@@ -67,7 +69,7 @@ function createBlocks(number){
     for (let i = 0; i < number; i++){
         let x_coord = Math.trunc(Math.random() * (canvas.width - 20) + 1);
         let y_coord = Math.trunc(Math.random() * (canvas.height - 20) + 1);
-        // NEXT STEPS: Make it so that the velocity can be either positive or negative 
+
         let positive_negative_x = Math.round(Math.random());
         let positive_negative_y = Math.round(Math.random());
         let multiplier_x = 1;
@@ -239,7 +241,13 @@ function drawRectangle(){
 
     blocks.forEach(block =>{
         var image = new Image();
-        image.src = block.getClassification() + ".png";
+        
+        if (colour == "default"){
+            image.src = block.getClassification() + ".png";
+        
+        } else {
+            image.src = block.getClassification() + colour + ".png";
+        }
 
         ctx.drawImage(image, block.getX(), block.getY(), 20, 20)
 
@@ -256,9 +264,31 @@ setInterval(function(){drawRectangle()}, 10);
 var slider = document.getElementById("blockRange");
 var initialAmount = slider.value;
 createBlocks(initialAmount);
-
+changeColour(colour);
 slider.oninput = function(){
     document.getElementById("victory-message").innerHTML = "";
     createBlocks(this.value);
     document.getElementById("numberOfBlocks").innerHTML = this.value + " blocks!";
+}
+
+function changeColour(newColour){
+    colour = newColour;
+
+    switch(colour){
+        case "orange":
+            document.body.style.backgroundColor = "rgb(250, 213, 165)";
+            break;
+        case "red":
+            document.body.style.backgroundColor = "rgb(255, 99, 71)";
+            break;
+        case "blue":
+            document.body.style.backgroundColor = "rgb(0, 191, 255)";
+            break;
+        case "yellow":
+            document.body.style.backgroundColor = "rgb(250, 250, 210)";
+            break;
+        case "default":
+            document.body.style.backgroundColor = "white";
+            
+    }
 }
