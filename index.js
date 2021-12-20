@@ -243,10 +243,10 @@ function drawRectangle(){
         var image = new Image();
         
         if (colour == "default"){
-            image.src = block.getClassification() + ".png";
+            image.src = "Graphics/" + block.getClassification() + ".png";
         
         } else {
-            image.src = block.getClassification() + colour + ".png";
+            image.src = "Graphics/" + block.getClassification() + colour + ".png";
         }
 
         ctx.drawImage(image, block.getX(), block.getY(), 20, 20)
