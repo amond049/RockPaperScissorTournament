@@ -241,10 +241,10 @@ function drawRectangle(){
 
     blocks.forEach(block =>{
         var image = new Image();
-        
+
         if (colour == "default"){
             image.src = "Graphics/" + block.getClassification() + ".png";
-        
+
         } else {
             image.src = "Graphics/" + block.getClassification() + colour + ".png";
         }
@@ -265,6 +265,7 @@ var slider = document.getElementById("blockRange");
 var initialAmount = slider.value;
 createBlocks(initialAmount);
 changeColour(colour);
+document.getElementById("numberOfBlocks").style.color = colour;
 
 
 slider.oninput = function(){
@@ -275,22 +276,27 @@ slider.oninput = function(){
 
 function changeColour(newColour){
     colour = newColour;
-
+    
     switch(colour){
         case "orange":
             document.body.style.backgroundColor = "rgb(250, 213, 165)";
+            document.getElementById("numberOfBlocks").style.color = colour;
             break;
         case "red":
             document.body.style.backgroundColor = "rgb(255, 99, 71)";
+            document.getElementById("numberOfBlocks").style.color = colour;
             break;
         case "blue":
             document.body.style.backgroundColor = "rgb(0, 191, 255)";
+            document.getElementById("numberOfBlocks").style.color = colour;
             break;
         case "yellow":
             document.body.style.backgroundColor = "rgb(250, 250, 210)";
+            document.getElementById("numberOfBlocks").style.color = colour;
             break;
         case "default":
             document.body.style.backgroundColor = "white";
-            
+            document.getElementById("numberOfBlocks").style.color = "black";
+
     }
 }
