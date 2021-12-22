@@ -1,13 +1,16 @@
+/* Setting up the font that is used on this webpage */
 @font-face{
     font-family: "Oswald";
     src: url("Oswald/static/Oswald-Regular.ttf");
 }
 
+/* Initializing general body stuff */
 body{
     background-color: orange;
     font-family: "Oswald";
 }
 
+/* Customizing the canvas */
 canvas{
     margin: 0 auto;
     background-color: white;
@@ -64,6 +67,8 @@ h1{
 .customization{
     float: right;
     margin-right: 14%;
+    margin-bottom: 5%;
+    margin-left: 5%;
     width: 40%;
     background-color: white;
     height: 500px;
@@ -126,6 +131,10 @@ h1{
     color: white;
 }
 
+.footer{
+    display: block;
+
+}
 
 ::-webkit-scrollbar{
     width: 10px;
@@ -138,4 +147,28 @@ h1{
 a, a:visited{
     text-decoration: none;
     color: black;
+}
+
+.betting-info{
+    width: 40%;
+    margin-left: 46.5%;
+    text-align: center;
+    background-color: red;
+    font-weight: bold;
+}
+
+#betting-question{
+    font-size: 16px;
+}
+
+#betting-button-rock, #betting-button-paper, #betting-button-scissors{
+    background-color: white;
+    font-family: "Oswald";
+    border-radius: 4px;
+    padding: 20px;
+    margin: 0 10px;
+}
+
+#betting-button-rock:hover, #betting-button-paper:hover, #betting-button-scissors:hover{
+    background-color: lightgray;
 }
