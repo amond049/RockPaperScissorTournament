@@ -153,8 +153,8 @@ a, a:visited{
     width: 40%;
     margin-left: 46.5%;
     text-align: center;
-    background-color: red;
     font-weight: bold;
+    font-size: 18px;
 }
 
 #betting-question{
@@ -171,4 +171,8 @@ a, a:visited{
 
 #betting-button-rock:hover, #betting-button-paper:hover, #betting-button-scissors:hover{
     background-color: lightgray;
+}
+
+#betting-timer, #win-or-not{
+    font-size: 16px;
 }
