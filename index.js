@@ -333,7 +333,11 @@ slider.oninput = function(){
     if (currentBalance >= 100){
         createBlocks(this.value);
     } else {
-        document.getElementById("betting-timer").innerHTML = "You unfortunately do not have the appropriate funds to bet anymore. You can either watch without betting, or you can refresh the page to get your funds back again. "
+        document.getElementById("betting-timer").innerHTML = "You unfortunately do not have the appropriate funds to bet anymore. You can either watch without betting, or you can refresh the page to get your funds back again. ";
+        document.getElementById("blockRange").disabled = true;
+        document.getElementById("betting-button-rock").disabled = "disabled";
+        document.getElementById("betting-button-paper").disabled = "disabled";
+        document.getElementById("betting-button-scissors").disabled = "disabled";
     }
     document.getElementById("numberOfBlocks").innerHTML = this.value + " blocks!";
 }
