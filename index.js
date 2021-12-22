@@ -13,6 +13,7 @@ var colour = "orange";
 var playerBet = "";
 var currentBalance = 500;
 var incrementCount = 0;
+var bettingTime = 5000;
 
 // Creating a Block class that will be the type of all Rock, Papers and Scissors
 class Block {
@@ -219,7 +220,7 @@ function moveRectangle(blocks){
         // Printing a victory message if a specific block has won and stopping all movement
         if (winning){
             let classification = blocks[0].getClassification();
-            // Need to add or remove the correct amount from the user's balance
+            document.getElementById("blockRange").disabled = false;
 
             document.getElementById("victory-message").innerHTML = classification[0].toUpperCase() + classification.slice(1) + " wins!";
             for (let z = 0; z < blocks.length; z++){
@@ -230,24 +231,26 @@ function moveRectangle(blocks){
             if (incrementCount == 0){
                 if (playerBet == classification){
                     currentBalance += 100;
-                    
+                    // Should set the betting timer message to notify the user if they won and if so, how much did they win
+                    document.getElementById("win-or-not").innerHTML = "You bet correctly, you have won $100! Your current balance has now been updated. ";
                 } else if (playerBet == "") {
                     continue;
                 } else {
                     currentBalance -= 100;
+                    document.getElementById("win-or-not").innerHTML = "You bet incorrectly unfortunately, you have lost $100, better luck next time. Your current balance has now been updated. ";
                 }
 
                 incrementCount += 1;
                 document.getElementById("currentBalance").innerHTML = "$" + currentBalance;
             }
 
-            
         }
     }
 
 }
 
 function compareNumbers(a, b){
+    // Not really sure why this function is here, but it's just nice to have I suppose. 
     return a - b;
 }
 
@@ -257,6 +260,8 @@ function assignBet(bet){
     document.getElementById("betting-button-paper").disabled = "disabled";
     document.getElementById("betting-button-scissors").disabled = "disabled";
     document.getElementById("betting-button-" + bet).style.backgroundColor = "lightgray";
+    // Need to disable the range as well
+    document.getElementById("blockRange").disabled = true;
 }
 
 function getKeyByValue(object, value){
@@ -265,6 +270,18 @@ function getKeyByValue(object, value){
 
 // Drawing the rectangles at each update of the screen
 function drawRectangle(){
+    bettingTime -= 10;
+    if (bettingTime >= 0 && bettingTime % 1000 == 0){
+        document.getElementById("betting-timer").innerHTML = "Betting will close in " + ((bettingTime - bettingTime % 1000) / 1000) + " seconds.";
+    } else if (bettingTime < 0){
+        document.getElementById("betting-timer").innerHTML = "Betting is now closed. Please wait until the next round";
+        document.getElementById("betting-button-rock").disabled = "disabled";
+        document.getElementById("betting-button-paper").disabled = "disabled";
+        document.getElementById("betting-button-scissors").disabled = "disabled";
+        // Need to disable the range
+        document.getElementById("blockRange").disabled = true;
+    }
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "#666";
 
@@ -299,7 +316,10 @@ document.getElementById("numberOfBlocks").style.color = colour;
 
 
 slider.oninput = function(){
+    // Setting increment count to 0
     incrementCount = 0;
+    // Setting the timer back to 5 seconds
+    bettingTime = 5000;
     document.getElementById("betting-button-rock").disabled = false;
     document.getElementById("betting-button-rock").style.backgroundColor = "white";
     document.getElementById("betting-button-paper").disabled = false;
@@ -307,11 +327,13 @@ slider.oninput = function(){
     document.getElementById("betting-button-scissors").disabled = false;
     document.getElementById("betting-button-scissors").style.backgroundColor = "white";
     document.getElementById("victory-message").innerHTML = "";
+    document.getElementById("win-or-not").innerHTML = "";
+
     // Need to check if the player's balance is enough to actually play again
     if (currentBalance >= 100){
         createBlocks(this.value);
     } else {
-        console.log("You do not have the necessary funds to play this");
+        document.getElementById("betting-timer").innerHTML = "You unfortunately do not have the appropriate funds to bet anymore. You can either watch without betting, or you can refresh the page to get your funds back again. "
     }
     document.getElementById("numberOfBlocks").innerHTML = this.value + " blocks!";
 }
