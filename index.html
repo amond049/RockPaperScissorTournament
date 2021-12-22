@@ -6,13 +6,22 @@
     </head>
     <body>
         <h1>ROCK, PAPER, SCISSORS TOURNAMENT</h1>
+        <div class="betting-info">
+            <p>YOUR CURRENT BALANCE: </p>
+            <p id="currentBalance">$500</p>
+        </div>
+
         <div id="blocksinfo">
-            <br><br>
+            <p id="betting-question">Who do you think will win?</p>
+            <button id="betting-button-rock" onclick="assignBet('rock')">Rock</button>
+            <button id="betting-button-paper" onclick="assignBet('paper')">Paper</button>
+            <button id="betting-button-scissors" onclick="assignBet('scissors')">Scissors</button>
             <p>You currently have: </p>
             <p id="numberOfBlocks">30 blocks</p>
             <p id="victory-message"></p>
             <p id="disclaimer">Please be aware that adjusting the slider will restart the tournament!</p>
         </div>
+
         <div id="blockscanvas">
             <canvas id="screen" width="600" height="600" style="border: 1px solid black;"></canvas>
         </div>
@@ -29,10 +38,10 @@
                 <br>
                 All this combined with some wacky perfectly ellastic collisions makes for some unpredictable
                 interactions and makes it so that you can never tell who will win until the very last moment.
-                
+
             </p>
         </div>
-        
+
         <div class="customization">
             <h3>Customization!</h3>
             <button id="orange" onclick="changeColour('orange')">Orange</button>
@@ -41,8 +50,11 @@
             <button id="yellow" onclick="changeColour('yellow')">Yellow</button>
             <button id="blackandwhite" onclick="changeColour('default')">Black and White/Default</button>
         </div>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <a href="https://github.com/amond049?tab=repositories" target="_blank">You can find other projects I've worked on here!</a>
+
+        <div class="footer">
+            <a href="https://github.com/amond049?tab=repositories" target="_blank">You can find other projects I've worked on here!</a>
+        </div>
+
         <script src="index.js"></script>
     </body>
 </html>
